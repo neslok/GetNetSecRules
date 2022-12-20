@@ -1,10 +1,3 @@
-#########################################################
-##
-## .\GetNetSecRules.ps1 *> SecRules.txt
-
-
-
-
 
 # ########## Define variables for execution ############
 # Update with information specific to your environment #
@@ -22,11 +15,13 @@ foreach ($c in $clusterdeets) {
   Write-Host $RESTAPIUser
   Write-Host $RESTAPIPassword
 
+  Write-Host "Network Security Rules (Flow) on " $prisCentIP
+
 
   # Creates variable with base API BaseURL
 
   $BaseURL = "https://" + $prisCentIP + ":9440/api/nutanix/v3/"
-  Write-Host $BaseURL
+  #Write-Host $BaseURL
 
   # Creates header file for API calls
 
@@ -35,17 +30,20 @@ foreach ($c in $clusterdeets) {
   $headers.Add("Authorization", "Basic "+[System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($RESTAPIUser+":"+$RESTAPIPassword)))
  
 
-  Write-Host $headers.'Authorization'
-  Write-Host $headers.'Content-Type'
+  #Write-Host $headers.'Authorization'
+  #Write-Host $headers.'Content-Type'
 
 
-  # Get details (uuids) for project on cluster - needed to update blueprints
+  # Get security policies from Prism Central
 
   $body = "{`"kind`": `"network_security_rule`"}"
 
   $NRlist = Invoke-RestMethod -SkipCertificateCheck -Uri $BaseURL'network_security_rules/list' -Method 'POST' -Headers $headers -Body $body
 
-  $NRresponse =  $NRlist.entities | Convertto-Json -depth 100 | Out-File -FilePath .\nrresonse.json
+ $NRresponse =  $NRlist.entities | Convertto-Json -depth 100 | Out-File -FilePath .\nrresonse.json
+
+
+## Functions to collect details on each different policy type (Quarantine, Application, Isolation and VDI)
 
  function GetQuarRules {
   Write-Host ""
@@ -189,19 +187,30 @@ function GetAppRules {
         $ip = $sg.ip_subnet.ip
         $cidr = $sg.ip_subnet.prefix_length
         if ($sg.protocol -eq "TCP") {
-        $stprt = $sg.tcp_port_range_list.start_port
-        $eprt = $sg.tcp_port_range_list.end_port
-        Write-Host "Subnet: "$ip"/"$cidr "TCP Port Range: " $stprt "-" $eprt
-        }
-        elseif ($sg.protocol -eq "UDP") {
-          $stprt = $sg.udp_port_range_list.start_port
-          $eprt = $sg.udp_port_range_list.end_port
-          Write-Host "Subnet: "$ip"/"$cidr "UDP Port Range: " $stprt "-" $eprt
+          foreach ($x in $sg.tcp_port_range_list) {
+            $stprt = $x.start_port
+            $eprt = $x.end_port
+            if ($eprt -eq $stprt) {
+              Write-Host "Subnet: "$ip"/"$cidr "TCP Port Range: " $stprt
+            }
+            else {Write-Host "Subnet: "$ip"/"$cidr "TCP Port Range: " $stprt"-"$eprt}
           }
+          }
+          elseif ($sg.protocol -eq "UDP") {
+            foreach ($x in $sg.udp_port_range_list) {
+              $stprt = $x.start_port
+              $eprt = $x.end_port
+              if ($eprt -eq $stprt) {
+                Write-Host "Subnet: "$ip"/"$cidr "UDP Port Range: " $stprt
+              }
+              else {Write-Host "Subnet: "$ip"/"$cidr "UDP Port Range: " $stprt"-"$eprt}
+            }
+            }
         elseif ($sg.service_group_list.kind -eq "service_group") {
           $SGuuid = $sg.service_group_list.uuid
           $SGlist = Invoke-RestMethod -SkipCertificateCheck -Uri $BaseURL'/service_groups/'$SGuuid -Method 'GET' -Headers $headers
           $sgn = $SGlist.service_group.name
+          Write-Host "Subnet: "$ip"/"$cidr ":" $sgn
           }
         elseif ($sg.protocol -eq "ALL") {
           Write-Host "Subnet: "$ip"/"$cidr ": ALL"
@@ -212,14 +221,24 @@ function GetAppRules {
         $AGlist = Invoke-RestMethod -SkipCertificateCheck -Uri $BaseURL'/address_groups/'$AGuuid -Method 'GET' -Headers $headers
         $agn = $AGlist.address_group.name
         if ($sg.protocol -eq "TCP") {
-          $stprt = $sg.tcp_port_range_list.start_port
-          $eprt = $sg.tcp_port_range_list.end_port
-          Write-Host "Address Group:" $agn "TCP Port Range: " $stprt "-" $eprt
+          foreach ($x in $sg.tcp_port_range_list) {
+            $stprt = $x.start_port
+            $eprt = $x.end_port
+            if ($eprt -eq $stprt) {
+              Write-Host "Address Group: "$ip"/"$cidr "TCP Port Range: " $stprt
+            }
+            else {Write-Host "Address Group: "$ip"/"$cidr "TCP Port Range: " $stprt"-"$eprt}
+          }
           }
           elseif ($sg.protocol -eq "UDP") {
-            $stprt = $sg.udp_port_range_list.start_port
-            $eprt = $sg.udp_port_range_list.end_port
-            Write-Host "Address Group:" $agn "UDP Port Range: " $stprt "-" $eprt
+            foreach ($x in $sg.udp_port_range_list) {
+              $stprt = $x.start_port
+              $eprt = $x.end_port
+              if ($eprt -eq $stprt) {
+                Write-Host "Address Group: "$ip"/"$cidr "UDP Port Range: " $stprt
+              }
+              else {Write-Host "Address Group: "$ip"/"$cidr "UDP Port Range: " $stprt"-"$eprt}
+            }
             }
           elseif ($sg.service_group_list.kind -eq "service_group") {
             $SGuuid = $sg.service_group_list.uuid
@@ -267,19 +286,32 @@ function GetAppRules {
         $ip = $sg.ip_subnet.ip
         $cidr = $sg.ip_subnet.prefix_length
         if ($sg.protocol -eq "TCP") {
-        $stprt = $sg.tcp_port_range_list.start_port
-        $eprt = $sg.tcp_port_range_list.end_port
-        Write-Host "Subnet: "$ip"/"$cidr "TCP Port Range: " $stprt "-" $eprt
-        }
-        elseif ($sg.protocol -eq "UDP") {
-          $stprt = $sg.udp_port_range_list.start_port
-          $eprt = $sg.udp_port_range_list.end_port
-          Write-Host "Subnet: "$ip"/"$cidr "UDP Port Range: " $stprt "-" $eprt
+          foreach ($x in $sg.tcp_port_range_list) {
+            $stprt = $x.start_port
+            $eprt = $x.end_port
+            if ($eprt -eq $stprt) {
+              Write-Host "Subnet: "$ip"/"$cidr "TCP Port Range: " $stprt
+            }
+            else {Write-Host "Subnet: "$ip"/"$cidr "TCP Port Range: " $stprt"-"$eprt}
           }
+          }
+          elseif ($sg.protocol -eq "UDP") {
+            foreach ($x in $sg.udp_port_range_list) {
+              $stprt = $x.start_port
+              $eprt = $x.end_port
+              if ($eprt -eq $stprt) {
+                Write-Host "Subnet: "$ip"/"$cidr "UDP Port Range: " $stprt
+              }
+              else {Write-Host "Subnet: "$ip"/"$cidr "UDP Port Range: " $stprt"-"$eprt}
+            }
+            }
         elseif ($sg.service_group_list.kind -eq "service_group") {
-          $SGuuid = $sg.service_group_list.uuid
+          foreach ($x in $sg.service_group_list) {
+          $SGuuid = $x.uuid
           $SGlist = Invoke-RestMethod -SkipCertificateCheck -Uri $BaseURL'/service_groups/'$SGuuid -Method 'GET' -Headers $headers
           $sgn = $SGlist.service_group.name
+          Write-Host "Subnet: "$ip"/"$cidr ":" $sgn
+          }
           }
         elseif ($sg.protocol -eq "ALL") {
           Write-Host "Subnet: "$ip"/"$cidr ": ALL"
@@ -290,33 +322,45 @@ function GetAppRules {
         $AGlist = Invoke-RestMethod -SkipCertificateCheck -Uri $BaseURL'/address_groups/'$AGuuid -Method 'GET' -Headers $headers
         $agn = $AGlist.address_group.name
         if ($sg.protocol -eq "TCP") {
-          $stprt = $sg.tcp_port_range_list.start_port
-          $eprt = $sg.tcp_port_range_list.end_port
-          Write-Host "Address Group:" $agn "TCP Port Range: " $stprt "-" $eprt
+          foreach ($x in $sg.tcp_port_range_list) {
+            $stprt = $x.start_port
+            $eprt = $x.end_port
+            if ($eprt -eq $stprt) {
+              Write-Host "Address Group: "$agn "TCP Port Range: " $stprt
+            }
+            else {Write-Host "Address Group: "$agn "TCP Port Range: " $stprt"-"$eprt}
+          }
           }
           elseif ($sg.protocol -eq "UDP") {
-            $stprt = $sg.udp_port_range_list.start_port
-            $eprt = $sg.udp_port_range_list.end_port
-            Write-Host "Address Group:" $agn "UDP Port Range: " $stprt "-" $eprt
+            foreach ($x in $sg.udp_port_range_list) {
+              $stprt = $x.start_port
+              $eprt = $x.end_port
+              if ($eprt -eq $stprt) {
+                Write-Host "Address Group: "$agn "UDP Port Range: " $stprt
+              }
+              else {Write-Host "Address Group: "$agn "UDP Port Range: " $stprt"-"$eprt}
+            }
             }
           elseif ($sg.service_group_list.kind -eq "service_group") {
-            $SGuuid = $sg.service_group_list.uuid
+            foreach ($x in $sg.service_group_list) {
+            $SGuuid = $x.uuid
             $SGlist = Invoke-RestMethod -SkipCertificateCheck -Uri $BaseURL'/service_groups/'$SGuuid -Method 'GET' -Headers $headers
             $sgn = $SGlist.service_group.name
             Write-Host "Address Group:" $agn ":" $sgn
             }
+            }
         
         }
 
-      if ($sg.service_group_list.kind -eq "service_group") {
-        $SGuuid = $sg.service_group_list.uuid
-        $SGlist = Invoke-RestMethod -SkipCertificateCheck -Uri $BaseURL'/service_groups/'$SGuuid -Method 'GET' -Headers $headers
-        $sgn = $SGlist.service_group.name
-        $ip = $sg.ip_subnet.ip
-        $cidr = $sg.ip_subnet.prefix_length
+      # if ($sg.service_group_list.kind -eq "service_group") {
+      #   $SGuuid = $sg.service_group_list.uuid
+      #   $SGlist = Invoke-RestMethod -SkipCertificateCheck -Uri $BaseURL'/service_groups/'$SGuuid -Method 'GET' -Headers $headers
+      #   $sgn = $SGlist.service_group.name
+      #   $ip = $sg.ip_subnet.ip
+      #   $cidr = $sg.ip_subnet.prefix_length
         
-        if ($sg.ip_subnet.ip -ne $null) {Write-Host "Subnet: "$ip"/"$cidr ":" $sgn}
-          }    
+      #   if ($sg.ip_subnet.ip -ne $null) {Write-Host "Subnet: "$ip"/"$cidr ":" $sgn}
+      #     }    
         elseif ($sg.protocol -eq "ALL") {
         $sgn = "ALL"
           } 
@@ -513,41 +557,54 @@ function GetVDIRules {
             Write-Host "Address Group:" $agn "UDP Port Range: " $stprt "-" $eprt
             }
           elseif ($sg.service_group_list.kind -eq "service_group") {
+            foreach ($x in $sg.service_group_list) {
             $SGuuid = $sg.service_group_list.uuid
             $SGlist = Invoke-RestMethod -SkipCertificateCheck -Uri $BaseURL'/service_groups/'$SGuuid -Method 'GET' -Headers $headers
             $sgn = $SGlist.service_group.name
             Write-Host "Address Group:" $agn ":" $sgn
             }
-        
+            }
+        }  
+        foreach ($p in $sg.filter.params) {
+          $param = Get-Member -InputObject $p -membertype noteproperty 
+          foreach ($x in $param.name) {
+            if ($sg.protocol -eq "TCP") {
+              $stprt = $sg.tcp_port_range_list.start_port
+              $eprt = $sg.tcp_port_range_list.end_port
+              Write-Host $x ":" $sg.filter.params.$x "TCP Port Range: " $stprt "-" $eprt
+              }
+              elseif ($sg.protocol -eq "UDP") {
+                $stprt = $sg.udp_port_range_list.start_port
+                $eprt = $sg.udp_port_range_list.end_port
+                Write-Host $x ":" $sg.filter.params.$x "UDP Port Range: " $stprt "-" $eprt
+                }
+              elseif ($sg.service_group_list.kind -eq "service_group") {
+                foreach ($s in $sg.service_group_list) {
+                $SGuuid = $s.uuid
+                $SGlist = Invoke-RestMethod -SkipCertificateCheck -Uri $BaseURL'/service_groups/'$SGuuid -Method 'GET' -Headers $headers
+                $sgn = $SGlist.service_group.name
+                Write-Host $x ":" $sg.filter.params.$x ":" $sgn
+                }
+                }
+          }
         }
 
-      if ($sg.service_group_list.kind -eq "service_group") {
-        $SGuuid = $sg.service_group_list.uuid
-        $SGlist = Invoke-RestMethod -SkipCertificateCheck -Uri $BaseURL'/service_groups/'$SGuuid -Method 'GET' -Headers $headers
-        $sgn = $SGlist.service_group.name
-        $ip = $sg.ip_subnet.ip
-        $cidr = $sg.ip_subnet.prefix_length
-        
-        if ($sg.ip_subnet.ip -ne $null) {Write-Host "Subnet: "$ip"/"$cidr ":" $sgn}
-          }    
-        elseif ($sg.protocol -eq "ALL") {
+        if ($sg.protocol -eq "ALL") {
         $sgn = "ALL"
           } 
 
-      foreach ($p in $sg.filter.params) {
-        $param = Get-Member -InputObject $p -membertype noteproperty 
-        foreach ($x in $param.name) {
-          Write-Host $x ":" $sg.filter.params.$x ":" $sgn
-        }
-      }
+  
       Write-Host ""
     }
 }
 
-  foreach ($r in $NRlist.entities) {
+######## Main script function #### 
+
+  foreach ($r in $NRlist.entities) {  # $r is each rule entity with each policy 
     
-    
-    $a = Get-Member -InputObject $r.spec.resources -membertype noteproperty
+    $a = Get-Member -InputObject $r.spec.resources -membertype noteproperty ## Gets the rule type from each rule as they are ahndled slightly differently
+
+    ## When a match on a rule type is found, the function specific to the policy/rule type is executed
 
     if ($a.name -eq "quarantine_rule") {
         $quarrule = $r.spec.resources.quarantine_rule
