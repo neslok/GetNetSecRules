@@ -1,0 +1,2055 @@
+[
+  {
+    "status": {
+      "state": "COMPLETE",
+      "execution_context": {
+        "task_uuid": [
+          "8d0502f9-61a8-4e15-bac6-b24a601ec3c4"
+        ]
+      },
+      "name": "Quarantine",
+      "resources": {
+        "quarantine_rule": {
+          "action": "APPLY",
+          "target_group": {
+            "filter": {
+              "kind_list": [
+                "vm"
+              ],
+              "type": "CATEGORIES_MATCH_ALL",
+              "params": {
+                "Quarantine": [
+                  "Default"
+                ]
+              }
+            },
+            "default_internal_policy": "ALLOW_ALL",
+            "peer_specification_type": "FILTER"
+          }
+        }
+      },
+      "description": "System defined quarantine rule for Quarantine:Default category"
+    },
+    "spec": {
+      "description": "System defined quarantine rule for Quarantine:Default category",
+      "resources": {
+        "quarantine_rule": {
+          "action": "APPLY",
+          "target_group": {
+            "filter": {
+              "params": {
+                "Quarantine": [
+                  "Default"
+                ]
+              },
+              "kind_list": [
+                "vm"
+              ],
+              "type": "CATEGORIES_MATCH_ALL"
+            },
+            "peer_specification_type": "FILTER"
+          }
+        }
+      },
+      "name": "Quarantine"
+    },
+    "metadata": {
+      "last_update_time": "2022-10-17T16:15:21Z",
+      "kind": "network_security_rule",
+      "uuid": "0334a2b2-84d3-490c-89ea-cd4be49a0f90",
+      "creation_time": "2022-10-17T16:15:20Z",
+      "spec_version": 0,
+      "spec_hash": "00000000000000000000000000000000000000000000000000",
+      "categories_mapping": {},
+      "owner_reference": {
+        "kind": "user",
+        "uuid": "00000000-0000-0000-0000-000000000000",
+        "name": "admin"
+      },
+      "categories": {}
+    }
+  },
+  {
+    "status": {
+      "state": "COMPLETE",
+      "execution_context": {
+        "task_uuid": [
+          "2139f97a-27d5-437b-9545-ae4e88157e82"
+        ]
+      },
+      "name": "Quarantine",
+      "resources": {
+        "quarantine_rule": {
+          "action": "APPLY",
+          "target_group": {
+            "filter": {
+              "kind_list": [
+                "vm"
+              ],
+              "type": "CATEGORIES_MATCH_ALL",
+              "params": {
+                "Quarantine": [
+                  "Forensics"
+                ]
+              }
+            },
+            "default_internal_policy": "ALLOW_ALL",
+            "peer_specification_type": "FILTER"
+          },
+          "inbound_allow_list": [
+            {
+              "ip_subnet": {
+                "ip": "192.168.10.200",
+                "prefix_length": 32
+              },
+              "protocol": "ALL",
+              "rule_id": 1,
+              "peer_specification_type": "IP_SUBNET"
+            },
+            {
+              "address_group_inclusion_list": [
+                {
+                  "kind": "address_group",
+                  "uuid": "1bbeb419-c383-4511-9ce2-3cec18a8e10c",
+                  "name": "KOSVPN"
+                }
+              ],
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "ce98b813-64b3-424f-a8de-40ba5c24cad7",
+                  "name": "MS_RDP"
+                }
+              ],
+              "rule_id": 2,
+              "peer_specification_type": "IP_SUBNET"
+            }
+          ]
+        }
+      },
+      "description": "System defined quarantine rule for Quarantine:Forensics category"
+    },
+    "spec": {
+      "description": "System defined quarantine rule for Quarantine:Forensics category",
+      "resources": {
+        "allow_ipv6_traffic": false,
+        "quarantine_rule": {
+          "action": "APPLY",
+          "outbound_allow_list": [],
+          "target_group": {
+            "filter": {
+              "params": {
+                "Quarantine": [
+                  "Forensics"
+                ]
+              },
+              "kind_list": [
+                "vm"
+              ],
+              "type": "CATEGORIES_MATCH_ALL"
+            },
+            "peer_specification_type": "FILTER"
+          },
+          "inbound_allow_list": [
+            {
+              "ip_subnet": {
+                "ip": "192.168.10.200",
+                "prefix_length": 32
+              },
+              "protocol": "ALL",
+              "rule_id": 1,
+              "peer_specification_type": "IP_SUBNET"
+            },
+            {
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "ce98b813-64b3-424f-a8de-40ba5c24cad7"
+                }
+              ],
+              "peer_specification_type": "IP_SUBNET",
+              "address_group_inclusion_list": [
+                {
+                  "kind": "address_group",
+                  "uuid": "1bbeb419-c383-4511-9ce2-3cec18a8e10c"
+                }
+              ],
+              "rule_id": 2
+            }
+          ]
+        },
+        "is_policy_hitlog_enabled": false
+      },
+      "name": "Quarantine"
+    },
+    "metadata": {
+      "last_update_time": "2022-12-17T20:24:24Z",
+      "kind": "network_security_rule",
+      "uuid": "2852a8a0-07b0-4d86-804b-dbe02aa3d272",
+      "creation_time": "2022-10-17T16:15:20Z",
+      "spec_version": 1,
+      "spec_hash": "00000000000000000000000000000000000000000000000000",
+      "categories_mapping": {},
+      "owner_reference": {
+        "kind": "user",
+        "uuid": "00000000-0000-0000-0000-000000000000",
+        "name": "admin"
+      },
+      "categories": {}
+    }
+  },
+  {
+    "status": {
+      "state": "COMPLETE",
+      "execution_context": {
+        "task_uuid": [
+          "734ddc83-3f4c-4d25-a037-4066641929ec"
+        ]
+      },
+      "name": "FSCVM-default-policy",
+      "resources": {
+        "app_rule": {
+          "action": "APPLY",
+          "outbound_allow_list": [
+            {
+              "rule_id": 1,
+              "peer_specification_type": "ALL"
+            }
+          ],
+          "target_group": {
+            "filter": {
+              "kind_list": [
+                "vm"
+              ],
+              "type": "CATEGORIES_MATCH_ALL",
+              "params": {
+                "AppType": [
+                  "Default"
+                ]
+              }
+            },
+            "default_internal_policy": "ALLOW_ALL",
+            "peer_specification_type": "FILTER"
+          },
+          "inbound_allow_list": [
+            {
+              "rule_id": 1,
+              "peer_specification_type": "ALL"
+            }
+          ]
+        }
+      },
+      "description": "default-value-for-flow-security-central-vm"
+    },
+    "spec": {
+      "description": "default-value-for-flow-security-central-vm",
+      "resources": {
+        "app_rule": {
+          "action": "APPLY",
+          "outbound_allow_list": [
+            {
+              "rule_id": 1,
+              "peer_specification_type": "ALL"
+            }
+          ],
+          "target_group": {
+            "filter": {
+              "params": {
+                "AppType": [
+                  "Default"
+                ]
+              },
+              "kind_list": [
+                "vm"
+              ],
+              "type": "CATEGORIES_MATCH_ALL"
+            },
+            "peer_specification_type": "FILTER"
+          },
+          "inbound_allow_list": [
+            {
+              "rule_id": 1,
+              "peer_specification_type": "ALL"
+            }
+          ]
+        }
+      },
+      "name": "FSCVM-default-policy"
+    },
+    "metadata": {
+      "last_update_time": "2022-10-27T19:26:50Z",
+      "kind": "network_security_rule",
+      "uuid": "f472c7c5-8edc-4bb0-a180-d756ee7468df",
+      "creation_time": "2022-10-27T19:26:48Z",
+      "spec_version": 0,
+      "spec_hash": "00000000000000000000000000000000000000000000000000",
+      "categories_mapping": {},
+      "owner_reference": {
+        "kind": "user",
+        "uuid": "00000000-0000-0000-0000-000000000000",
+        "name": "admin"
+      },
+      "categories": {}
+    }
+  },
+  {
+    "status": {
+      "state": "COMPLETE",
+      "execution_context": {
+        "task_uuid": [
+          "d3f20e15-958c-4b34-bd22-7d5427966a50"
+        ]
+      },
+      "name": "tj-linux",
+      "resources": {
+        "app_rule": {
+          "action": "MONITOR",
+          "outbound_allow_list": [
+            {
+              "rule_id": 1,
+              "peer_specification_type": "ALL"
+            }
+          ],
+          "target_group": {
+            "filter": {
+              "kind_list": [
+                "vm"
+              ],
+              "type": "CATEGORIES_MATCH_ALL",
+              "params": {
+                "AppType": [
+                  "tj-linux"
+                ]
+              }
+            },
+            "default_internal_policy": "ALLOW_ALL",
+            "peer_specification_type": "FILTER"
+          },
+          "inbound_allow_list": [
+            {
+              "ip_subnet": {
+                "ip": "10.0.0.0",
+                "prefix_length": 8
+              },
+              "protocol": "ALL",
+              "rule_id": 1,
+              "peer_specification_type": "IP_SUBNET"
+            }
+          ]
+        }
+      },
+      "description": "secure linux"
+    },
+    "spec": {
+      "description": "secure linux",
+      "resources": {
+        "allow_ipv6_traffic": false,
+        "app_rule": {
+          "action": "MONITOR",
+          "outbound_allow_list": [
+            {
+              "rule_id": 1,
+              "peer_specification_type": "ALL"
+            }
+          ],
+          "target_group": {
+            "filter": {
+              "params": {
+                "AppType": [
+                  "tj-linux"
+                ]
+              },
+              "kind_list": [
+                "vm"
+              ],
+              "type": "CATEGORIES_MATCH_ALL"
+            },
+            "peer_specification_type": "FILTER"
+          },
+          "inbound_allow_list": [
+            {
+              "ip_subnet": {
+                "ip": "10.0.0.0",
+                "prefix_length": 8
+              },
+              "protocol": "ALL",
+              "rule_id": 1,
+              "peer_specification_type": "IP_SUBNET"
+            }
+          ]
+        },
+        "is_policy_hitlog_enabled": true
+      },
+      "name": "tj-linux"
+    },
+    "metadata": {
+      "last_update_time": "2022-11-03T18:55:10Z",
+      "kind": "network_security_rule",
+      "uuid": "608c7718-965a-475d-8a95-3df343ec554d",
+      "creation_time": "2022-11-03T18:55:08Z",
+      "spec_version": 0,
+      "spec_hash": "00000000000000000000000000000000000000000000000000",
+      "categories_mapping": {},
+      "owner_reference": {
+        "kind": "user",
+        "uuid": "00000000-0000-0000-0000-000000000000",
+        "name": "admin"
+      },
+      "categories": {}
+    }
+  },
+  {
+    "status": {
+      "state": "COMPLETE",
+      "execution_context": {
+        "task_uuid": [
+          "9ca9b4d0-e0b8-45f5-8675-1a46c369ac2d"
+        ]
+      },
+      "name": "Test",
+      "resources": {
+        "app_rule": {
+          "action": "MONITOR",
+          "outbound_allow_list": [
+            {
+              "filter": {
+                "kind_list": [
+                  "vm"
+                ],
+                "type": "CATEGORIES_MATCH_ALL",
+                "params": {
+                  "AppTier": [
+                    "Default"
+                  ]
+                }
+              },
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "f3ed1ed3-335b-4090-a00e-c06de1fe78dd",
+                  "name": "https"
+                }
+              ],
+              "rule_id": 1,
+              "peer_specification_type": "FILTER"
+            }
+          ],
+          "target_group": {
+            "filter": {
+              "kind_list": [
+                "vm"
+              ],
+              "type": "CATEGORIES_MATCH_ALL",
+              "params": {
+                "AppType": [
+                  "Microsoft_SQL"
+                ]
+              }
+            },
+            "default_internal_policy": "ALLOW_ALL",
+            "peer_specification_type": "FILTER"
+          },
+          "inbound_allow_list": [
+            {
+              "ip_subnet": {
+                "ip": "192.168.10.0",
+                "prefix_length": 24
+              },
+              "tcp_port_range_list": [
+                {
+                  "end_port": 3070,
+                  "start_port": 3066
+                }
+              ],
+              "protocol": "TCP",
+              "rule_id": 4,
+              "peer_specification_type": "IP_SUBNET"
+            },
+            {
+              "ip_subnet": {
+                "ip": "192.168.10.0",
+                "prefix_length": 24
+              },
+              "protocol": "UDP",
+              "rule_id": 5,
+              "peer_specification_type": "IP_SUBNET",
+              "udp_port_range_list": [
+                {
+                  "end_port": 3456,
+                  "start_port": 3456
+                }
+              ]
+            },
+            {
+              "address_group_inclusion_list": [
+                {
+                  "kind": "address_group",
+                  "uuid": "1bbeb419-c383-4511-9ce2-3cec18a8e10c",
+                  "name": "KOSVPN"
+                }
+              ],
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "3085bfc8-6d57-4069-94cb-a649fbc27c35",
+                  "name": "ssh"
+                }
+              ],
+              "rule_id": 3,
+              "peer_specification_type": "IP_SUBNET"
+            },
+            {
+              "ip_subnet": {
+                "ip": "10.42.156.0",
+                "prefix_length": 24
+              },
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "f3ed1ed3-335b-4090-a00e-c06de1fe78dd",
+                  "name": "https"
+                }
+              ],
+              "rule_id": 2,
+              "peer_specification_type": "IP_SUBNET"
+            },
+            {
+              "filter": {
+                "kind_list": [
+                  "vm"
+                ],
+                "type": "CATEGORIES_MATCH_ALL",
+                "params": {
+                  "AppFamily": [
+                    "DevOps"
+                  ]
+                }
+              },
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "5ad597af-75c5-4d0f-9b20-ecb40cb00005",
+                  "name": "ms-sql-m"
+                }
+              ],
+              "rule_id": 1,
+              "peer_specification_type": "FILTER"
+            }
+          ]
+        }
+      },
+      "description": "fdsfasdf"
+    },
+    "spec": {
+      "description": "fdsfasdf",
+      "resources": {
+        "allow_ipv6_traffic": false,
+        "app_rule": {
+          "action": "MONITOR",
+          "outbound_allow_list": [
+            {
+              "filter": {
+                "params": {
+                  "AppTier": [
+                    "Default"
+                  ]
+                },
+                "kind_list": [
+                  "vm"
+                ],
+                "type": "CATEGORIES_MATCH_ALL"
+              },
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "f3ed1ed3-335b-4090-a00e-c06de1fe78dd"
+                }
+              ],
+              "rule_id": 1,
+              "peer_specification_type": "FILTER"
+            }
+          ],
+          "target_group": {
+            "filter": {
+              "params": {
+                "AppType": [
+                  "Microsoft_SQL"
+                ]
+              },
+              "kind_list": [
+                "vm"
+              ],
+              "type": "CATEGORIES_MATCH_ALL"
+            },
+            "peer_specification_type": "FILTER"
+          },
+          "inbound_allow_list": [
+            {
+              "ip_subnet": {
+                "ip": "192.168.10.0",
+                "prefix_length": 24
+              },
+              "tcp_port_range_list": [
+                {
+                  "end_port": 3070,
+                  "start_port": 3066
+                }
+              ],
+              "protocol": "TCP",
+              "rule_id": 4,
+              "peer_specification_type": "IP_SUBNET"
+            },
+            {
+              "ip_subnet": {
+                "ip": "192.168.10.0",
+                "prefix_length": 24
+              },
+              "protocol": "UDP",
+              "rule_id": 5,
+              "peer_specification_type": "IP_SUBNET",
+              "udp_port_range_list": [
+                {
+                  "end_port": 3456,
+                  "start_port": 3456
+                }
+              ]
+            },
+            {
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "3085bfc8-6d57-4069-94cb-a649fbc27c35"
+                }
+              ],
+              "peer_specification_type": "IP_SUBNET",
+              "address_group_inclusion_list": [
+                {
+                  "kind": "address_group",
+                  "uuid": "1bbeb419-c383-4511-9ce2-3cec18a8e10c"
+                }
+              ],
+              "rule_id": 3
+            },
+            {
+              "ip_subnet": {
+                "ip": "10.42.156.0",
+                "prefix_length": 24
+              },
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "f3ed1ed3-335b-4090-a00e-c06de1fe78dd"
+                }
+              ],
+              "rule_id": 2,
+              "peer_specification_type": "IP_SUBNET"
+            },
+            {
+              "filter": {
+                "params": {
+                  "AppFamily": [
+                    "DevOps"
+                  ]
+                },
+                "kind_list": [
+                  "vm"
+                ],
+                "type": "CATEGORIES_MATCH_ALL"
+              },
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "5ad597af-75c5-4d0f-9b20-ecb40cb00005"
+                }
+              ],
+              "rule_id": 1,
+              "peer_specification_type": "FILTER"
+            }
+          ]
+        },
+        "is_policy_hitlog_enabled": false
+      },
+      "name": "Test"
+    },
+    "metadata": {
+      "last_update_time": "2022-12-17T03:34:04Z",
+      "kind": "network_security_rule",
+      "uuid": "1bac4fa7-efe5-4508-a086-79d26cbbd8d4",
+      "creation_time": "2022-11-07T15:29:35Z",
+      "spec_version": 4,
+      "spec_hash": "00000000000000000000000000000000000000000000000000",
+      "categories_mapping": {},
+      "owner_reference": {
+        "kind": "user",
+        "uuid": "00000000-0000-0000-0000-000000000000",
+        "name": "admin"
+      },
+      "categories": {}
+    }
+  },
+  {
+    "status": {
+      "state": "COMPLETE",
+      "execution_context": {
+        "task_uuid": [
+          "b0e67c4a-1ae7-4689-8891-89ed7309d99f"
+        ]
+      },
+      "name": "SecureFiesta",
+      "resources": {
+        "app_rule": {
+          "action": "MONITOR",
+          "outbound_allow_list": [
+            {
+              "ip_subnet": {
+                "ip": "10.42.156.41",
+                "prefix_length": 32
+              },
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "203d362c-cfd9-4b1f-a442-826c2978d08a",
+                  "name": "domain"
+                }
+              ],
+              "rule_id": 4,
+              "peer_specification_type": "IP_SUBNET"
+            },
+            {
+              "ip_subnet": {
+                "ip": "10.10.10.0",
+                "prefix_length": 24
+              },
+              "protocol": "ALL",
+              "rule_id": 1,
+              "peer_specification_type": "IP_SUBNET"
+            },
+            {
+              "address_group_inclusion_list": [
+                {
+                  "kind": "address_group",
+                  "uuid": "979a07d8-a8c2-4136-a9b0-1c2a25dfd380",
+                  "name": "AWS_Scope"
+                }
+              ],
+              "protocol": "TCP",
+              "rule_id": 3,
+              "peer_specification_type": "IP_SUBNET",
+              "tcp_port_range_list": [
+                {
+                  "end_port": 1240,
+                  "start_port": 1234
+                },
+                {
+                  "end_port": 4567,
+                  "start_port": 4567
+                }
+              ]
+            },
+            {
+              "address_group_inclusion_list": [
+                {
+                  "kind": "address_group",
+                  "uuid": "979a07d8-a8c2-4136-a9b0-1c2a25dfd380",
+                  "name": "AWS_Scope"
+                }
+              ],
+              "protocol": "UDP",
+              "rule_id": 5,
+              "peer_specification_type": "IP_SUBNET",
+              "udp_port_range_list": [
+                {
+                  "end_port": 1234,
+                  "start_port": 1234
+                }
+              ]
+            },
+            {
+              "filter": {
+                "kind_list": [
+                  "vm"
+                ],
+                "type": "CATEGORIES_MATCH_ALL",
+                "params": {
+                  "AppType": [
+                    "Fiesta"
+                  ],
+                  "AppTier": [
+                    "DB"
+                  ]
+                }
+              },
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "049ecea4-6b1e-4b0e-901d-8019e2a772bc",
+                  "name": "mysql"
+                }
+              ],
+              "rule_id": 2,
+              "peer_specification_type": "FILTER"
+            }
+          ],
+          "target_group": {
+            "filter": {
+              "kind_list": [
+                "vm"
+              ],
+              "type": "CATEGORIES_MATCH_ALL",
+              "params": {
+                "AppType": [
+                  "Fiesta"
+                ],
+                "AppTier": [
+                  "web"
+                ]
+              }
+            },
+            "default_internal_policy": "ALLOW_ALL",
+            "peer_specification_type": "FILTER"
+          },
+          "inbound_allow_list": [
+            {
+              "filter": {
+                "kind_list": [
+                  "vm"
+                ],
+                "type": "CATEGORIES_MATCH_ALL",
+                "params": {
+                  "VDI": [
+                    "Eng"
+                  ]
+                }
+              },
+              "protocol": "ALL",
+              "rule_id": 1,
+              "peer_specification_type": "FILTER"
+            },
+            {
+              "address_group_inclusion_list": [
+                {
+                  "kind": "address_group",
+                  "uuid": "1bbeb419-c383-4511-9ce2-3cec18a8e10c",
+                  "name": "KOSVPN"
+                }
+              ],
+              "icmp_type_code_list": [
+                {
+                  "code": 0,
+                  "type": 8
+                }
+              ],
+              "protocol": "ICMP",
+              "rule_id": 4,
+              "peer_specification_type": "IP_SUBNET"
+            },
+            {
+              "address_group_inclusion_list": [
+                {
+                  "kind": "address_group",
+                  "uuid": "1bbeb419-c383-4511-9ce2-3cec18a8e10c",
+                  "name": "KOSVPN"
+                }
+              ],
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "bd015791-3c73-4cb9-a42b-b0f1db40f4ad",
+                  "name": "http"
+                }
+              ],
+              "rule_id": 3,
+              "peer_specification_type": "IP_SUBNET"
+            },
+            {
+              "filter": {
+                "kind_list": [
+                  "vm"
+                ],
+                "type": "CATEGORIES_MATCH_ALL",
+                "params": {
+                  "VDI": [
+                    "PartyPlanners"
+                  ]
+                }
+              },
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "bd015791-3c73-4cb9-a42b-b0f1db40f4ad",
+                  "name": "http"
+                }
+              ],
+              "rule_id": 2,
+              "peer_specification_type": "FILTER"
+            }
+          ]
+        }
+      },
+      "description": "Limit access to and from Fiesta APP"
+    },
+    "spec": {
+      "description": "Limit access to and from Fiesta APP",
+      "resources": {
+        "allow_ipv6_traffic": false,
+        "app_rule": {
+          "action": "MONITOR",
+          "outbound_allow_list": [
+            {
+              "ip_subnet": {
+                "ip": "10.42.156.41",
+                "prefix_length": 32
+              },
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "203d362c-cfd9-4b1f-a442-826c2978d08a"
+                }
+              ],
+              "rule_id": 4,
+              "peer_specification_type": "IP_SUBNET"
+            },
+            {
+              "ip_subnet": {
+                "ip": "10.10.10.0",
+                "prefix_length": 24
+              },
+              "protocol": "ALL",
+              "rule_id": 1,
+              "peer_specification_type": "IP_SUBNET"
+            },
+            {
+              "tcp_port_range_list": [
+                {
+                  "end_port": 1240,
+                  "start_port": 1234
+                },
+                {
+                  "end_port": 4567,
+                  "start_port": 4567
+                }
+              ],
+              "protocol": "TCP",
+              "peer_specification_type": "IP_SUBNET",
+              "address_group_inclusion_list": [
+                {
+                  "kind": "address_group",
+                  "uuid": "979a07d8-a8c2-4136-a9b0-1c2a25dfd380"
+                }
+              ],
+              "rule_id": 3
+            },
+            {
+              "udp_port_range_list": [
+                {
+                  "end_port": 1234,
+                  "start_port": 1234
+                }
+              ],
+              "protocol": "UDP",
+              "peer_specification_type": "IP_SUBNET",
+              "address_group_inclusion_list": [
+                {
+                  "kind": "address_group",
+                  "uuid": "979a07d8-a8c2-4136-a9b0-1c2a25dfd380"
+                }
+              ],
+              "rule_id": 5
+            },
+            {
+              "filter": {
+                "params": {
+                  "AppType": [
+                    "Fiesta"
+                  ],
+                  "AppTier": [
+                    "DB"
+                  ]
+                },
+                "kind_list": [
+                  "vm"
+                ],
+                "type": "CATEGORIES_MATCH_ALL"
+              },
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "049ecea4-6b1e-4b0e-901d-8019e2a772bc"
+                }
+              ],
+              "rule_id": 2,
+              "peer_specification_type": "FILTER"
+            }
+          ],
+          "target_group": {
+            "filter": {
+              "params": {
+                "AppType": [
+                  "Fiesta"
+                ],
+                "AppTier": [
+                  "web"
+                ]
+              },
+              "kind_list": [
+                "vm"
+              ],
+              "type": "CATEGORIES_MATCH_ALL"
+            },
+            "default_internal_policy": "ALLOW_ALL",
+            "peer_specification_type": "FILTER"
+          },
+          "inbound_allow_list": [
+            {
+              "filter": {
+                "params": {
+                  "VDI": [
+                    "Eng"
+                  ]
+                },
+                "kind_list": [
+                  "vm"
+                ],
+                "type": "CATEGORIES_MATCH_ALL"
+              },
+              "protocol": "ALL",
+              "rule_id": 1,
+              "peer_specification_type": "FILTER"
+            },
+            {
+              "peer_specification_type": "IP_SUBNET",
+              "protocol": "ICMP",
+              "icmp_type_code_list": [
+                {
+                  "code": 0,
+                  "type": 8
+                }
+              ],
+              "address_group_inclusion_list": [
+                {
+                  "kind": "address_group",
+                  "uuid": "1bbeb419-c383-4511-9ce2-3cec18a8e10c"
+                }
+              ],
+              "rule_id": 4
+            },
+            {
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "bd015791-3c73-4cb9-a42b-b0f1db40f4ad"
+                }
+              ],
+              "peer_specification_type": "IP_SUBNET",
+              "address_group_inclusion_list": [
+                {
+                  "kind": "address_group",
+                  "uuid": "1bbeb419-c383-4511-9ce2-3cec18a8e10c"
+                }
+              ],
+              "rule_id": 3
+            },
+            {
+              "filter": {
+                "params": {
+                  "VDI": [
+                    "PartyPlanners"
+                  ]
+                },
+                "kind_list": [
+                  "vm"
+                ],
+                "type": "CATEGORIES_MATCH_ALL"
+              },
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "bd015791-3c73-4cb9-a42b-b0f1db40f4ad"
+                }
+              ],
+              "rule_id": 2,
+              "peer_specification_type": "FILTER"
+            }
+          ]
+        },
+        "is_policy_hitlog_enabled": false
+      },
+      "name": "SecureFiesta"
+    },
+    "metadata": {
+      "last_update_time": "2022-12-18T22:32:37Z",
+      "kind": "network_security_rule",
+      "uuid": "4859daa3-be29-43d1-b7ad-81b675244381",
+      "creation_time": "2022-12-15T02:59:26Z",
+      "spec_version": 8,
+      "spec_hash": "00000000000000000000000000000000000000000000000000",
+      "categories_mapping": {},
+      "owner_reference": {
+        "kind": "user",
+        "uuid": "00000000-0000-0000-0000-000000000000",
+        "name": "admin"
+      },
+      "categories": {}
+    }
+  },
+  {
+    "status": {
+      "state": "COMPLETE",
+      "execution_context": {
+        "task_uuid": [
+          "c9bb6f5c-9594-4306-8597-3bfac5efea81"
+        ]
+      },
+      "name": "SecureFiesta",
+      "resources": {
+        "app_rule": {
+          "action": "MONITOR",
+          "outbound_allow_list": [
+            {
+              "ip_subnet": {
+                "ip": "10.42.156.41",
+                "prefix_length": 32
+              },
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "203d362c-cfd9-4b1f-a442-826c2978d08a",
+                  "name": "domain"
+                },
+                {
+                  "kind": "service_group",
+                  "uuid": "3085bfc8-6d57-4069-94cb-a649fbc27c35",
+                  "name": "ssh"
+                }
+              ],
+              "rule_id": 3,
+              "peer_specification_type": "IP_SUBNET"
+            },
+            {
+              "ip_subnet": {
+                "ip": "10.10.10.0",
+                "prefix_length": 24
+              },
+              "protocol": "UDP",
+              "rule_id": 1,
+              "peer_specification_type": "IP_SUBNET",
+              "udp_port_range_list": [
+                {
+                  "end_port": 53,
+                  "start_port": 53
+                }
+              ]
+            },
+            {
+              "ip_subnet": {
+                "ip": "10.10.10.0",
+                "prefix_length": 24
+              },
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "f4626308-d6a0-41f8-a6da-f8d8617f5325",
+                  "name": "mdns"
+                }
+              ],
+              "rule_id": 2,
+              "peer_specification_type": "IP_SUBNET"
+            }
+          ],
+          "target_group": {
+            "filter": {
+              "kind_list": [
+                "vm"
+              ],
+              "type": "CATEGORIES_MATCH_ALL",
+              "params": {
+                "AppType": [
+                  "Fiesta"
+                ],
+                "AppTier": [
+                  "DB"
+                ]
+              }
+            },
+            "default_internal_policy": "ALLOW_ALL",
+            "peer_specification_type": "FILTER"
+          },
+          "inbound_allow_list": [
+            {
+              "filter": {
+                "kind_list": [
+                  "vm"
+                ],
+                "type": "CATEGORIES_MATCH_ALL",
+                "params": {
+                  "VDI": [
+                    "Eng"
+                  ]
+                }
+              },
+              "protocol": "ALL",
+              "rule_id": 1,
+              "peer_specification_type": "FILTER"
+            },
+            {
+              "filter": {
+                "kind_list": [
+                  "vm"
+                ],
+                "type": "CATEGORIES_MATCH_ALL",
+                "params": {
+                  "AppType": [
+                    "Fiesta"
+                  ],
+                  "AppTier": [
+                    "web"
+                  ]
+                }
+              },
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "049ecea4-6b1e-4b0e-901d-8019e2a772bc",
+                  "name": "mysql"
+                }
+              ],
+              "rule_id": 2,
+              "peer_specification_type": "FILTER"
+            }
+          ]
+        }
+      },
+      "description": "Limit access to and from Fiesta APP"
+    },
+    "spec": {
+      "description": "Limit access to and from Fiesta APP",
+      "resources": {
+        "allow_ipv6_traffic": false,
+        "app_rule": {
+          "action": "MONITOR",
+          "outbound_allow_list": [
+            {
+              "ip_subnet": {
+                "ip": "10.42.156.41",
+                "prefix_length": 32
+              },
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "203d362c-cfd9-4b1f-a442-826c2978d08a"
+                },
+                {
+                  "kind": "service_group",
+                  "uuid": "3085bfc8-6d57-4069-94cb-a649fbc27c35"
+                }
+              ],
+              "rule_id": 3,
+              "peer_specification_type": "IP_SUBNET"
+            },
+            {
+              "ip_subnet": {
+                "ip": "10.10.10.0",
+                "prefix_length": 24
+              },
+              "protocol": "UDP",
+              "rule_id": 1,
+              "peer_specification_type": "IP_SUBNET",
+              "udp_port_range_list": [
+                {
+                  "end_port": 53,
+                  "start_port": 53
+                }
+              ]
+            },
+            {
+              "ip_subnet": {
+                "ip": "10.10.10.0",
+                "prefix_length": 24
+              },
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "f4626308-d6a0-41f8-a6da-f8d8617f5325"
+                }
+              ],
+              "rule_id": 2,
+              "peer_specification_type": "IP_SUBNET"
+            }
+          ],
+          "target_group": {
+            "filter": {
+              "params": {
+                "AppType": [
+                  "Fiesta"
+                ],
+                "AppTier": [
+                  "DB"
+                ]
+              },
+              "kind_list": [
+                "vm"
+              ],
+              "type": "CATEGORIES_MATCH_ALL"
+            },
+            "default_internal_policy": "ALLOW_ALL",
+            "peer_specification_type": "FILTER"
+          },
+          "inbound_allow_list": [
+            {
+              "filter": {
+                "params": {
+                  "VDI": [
+                    "Eng"
+                  ]
+                },
+                "kind_list": [
+                  "vm"
+                ],
+                "type": "CATEGORIES_MATCH_ALL"
+              },
+              "protocol": "ALL",
+              "rule_id": 1,
+              "peer_specification_type": "FILTER"
+            },
+            {
+              "filter": {
+                "params": {
+                  "AppType": [
+                    "Fiesta"
+                  ],
+                  "AppTier": [
+                    "web"
+                  ]
+                },
+                "kind_list": [
+                  "vm"
+                ],
+                "type": "CATEGORIES_MATCH_ALL"
+              },
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "049ecea4-6b1e-4b0e-901d-8019e2a772bc"
+                }
+              ],
+              "rule_id": 2,
+              "peer_specification_type": "FILTER"
+            }
+          ]
+        },
+        "is_policy_hitlog_enabled": false
+      },
+      "name": "SecureFiesta"
+    },
+    "metadata": {
+      "last_update_time": "2022-12-18T22:03:31Z",
+      "kind": "network_security_rule",
+      "uuid": "f51f61b6-5a71-400b-bb0d-9b820b4090d1",
+      "creation_time": "2022-12-15T02:59:26Z",
+      "spec_version": 5,
+      "spec_hash": "00000000000000000000000000000000000000000000000000",
+      "categories_mapping": {},
+      "owner_reference": {
+        "kind": "user",
+        "uuid": "00000000-0000-0000-0000-000000000000",
+        "name": "admin"
+      },
+      "categories": {}
+    }
+  },
+  {
+    "status": {
+      "state": "COMPLETE",
+      "execution_context": {
+        "task_uuid": [
+          "fb97c247-7288-4495-84c3-4c936bc6b844"
+        ]
+      },
+      "name": "IsolateDev_Prod",
+      "resources": {
+        "isolation_rule": {
+          "action": "MONITOR",
+          "first_entity_filter": {
+            "kind_list": [
+              "vm"
+            ],
+            "type": "CATEGORIES_MATCH_ALL",
+            "params": {
+              "Environment": [
+                "Dev"
+              ]
+            }
+          },
+          "second_entity_filter": {
+            "kind_list": [
+              "vm"
+            ],
+            "type": "CATEGORIES_MATCH_ALL",
+            "params": {
+              "Environment": [
+                "Production"
+              ]
+            }
+          }
+        }
+      },
+      "description": "Isolate dev environment from Prod"
+    },
+    "spec": {
+      "description": "Isolate dev environment from Prod",
+      "resources": {
+        "is_policy_hitlog_enabled": false,
+        "isolation_rule": {
+          "action": "MONITOR",
+          "first_entity_filter": {
+            "params": {
+              "Environment": [
+                "Dev"
+              ]
+            },
+            "kind_list": [
+              "vm"
+            ],
+            "type": "CATEGORIES_MATCH_ALL"
+          },
+          "second_entity_filter": {
+            "params": {
+              "Environment": [
+                "Production"
+              ]
+            },
+            "kind_list": [
+              "vm"
+            ],
+            "type": "CATEGORIES_MATCH_ALL"
+          }
+        }
+      },
+      "name": "IsolateDev_Prod"
+    },
+    "metadata": {
+      "last_update_time": "2022-12-17T22:32:13Z",
+      "kind": "network_security_rule",
+      "uuid": "c51fbdac-f215-42d0-ad8a-8f76869a9e15",
+      "creation_time": "2022-12-17T22:32:12Z",
+      "spec_version": 0,
+      "spec_hash": "00000000000000000000000000000000000000000000000000",
+      "categories_mapping": {},
+      "owner_reference": {
+        "kind": "user",
+        "uuid": "00000000-0000-0000-0000-000000000000",
+        "name": "admin"
+      },
+      "categories": {}
+    }
+  },
+  {
+    "status": {
+      "state": "COMPLETE",
+      "execution_context": {
+        "task_uuid": [
+          "86e5d059-bed1-4347-8786-189000d73d41"
+        ]
+      },
+      "name": "nonenvtest",
+      "resources": {
+        "isolation_rule": {
+          "action": "MONITOR",
+          "first_entity_filter": {
+            "kind_list": [
+              "vm"
+            ],
+            "type": "CATEGORIES_MATCH_ALL",
+            "params": {
+              "AppType": [
+                "Fiesta"
+              ]
+            }
+          },
+          "second_entity_filter": {
+            "kind_list": [
+              "vm"
+            ],
+            "type": "CATEGORIES_MATCH_ALL",
+            "params": {
+              "CalmApplication": [
+                "KOSecClients"
+              ]
+            }
+          }
+        }
+      },
+      "description": "blan"
+    },
+    "spec": {
+      "description": "blan",
+      "resources": {
+        "is_policy_hitlog_enabled": false,
+        "isolation_rule": {
+          "action": "MONITOR",
+          "first_entity_filter": {
+            "params": {
+              "AppType": [
+                "Fiesta"
+              ]
+            },
+            "kind_list": [
+              "vm"
+            ],
+            "type": "CATEGORIES_MATCH_ALL"
+          },
+          "second_entity_filter": {
+            "params": {
+              "CalmApplication": [
+                "KOSecClients"
+              ]
+            },
+            "kind_list": [
+              "vm"
+            ],
+            "type": "CATEGORIES_MATCH_ALL"
+          }
+        }
+      },
+      "name": "nonenvtest"
+    },
+    "metadata": {
+      "last_update_time": "2022-12-17T22:56:50Z",
+      "kind": "network_security_rule",
+      "uuid": "449fd582-758c-455e-a59c-165595d4c295",
+      "creation_time": "2022-12-17T22:56:48Z",
+      "spec_version": 0,
+      "spec_hash": "00000000000000000000000000000000000000000000000000",
+      "categories_mapping": {},
+      "owner_reference": {
+        "kind": "user",
+        "uuid": "00000000-0000-0000-0000-000000000000",
+        "name": "admin"
+      },
+      "categories": {}
+    }
+  },
+  {
+    "status": {
+      "state": "COMPLETE",
+      "execution_context": {
+        "task_uuid": [
+          "d399d05a-c2e2-4a45-89ac-126d7738a26b"
+        ]
+      },
+      "name": "VDI Policy",
+      "resources": {
+        "ad_rule": {
+          "action": "MONITOR",
+          "target_group": {
+            "filter": {
+              "kind_list": [
+                "vm"
+              ],
+              "type": "CATEGORIES_MATCH_ALL",
+              "params": {
+                "ADGroup": [
+                  "SSP Admins"
+                ]
+              }
+            },
+            "default_internal_policy": "DENY_ALL",
+            "peer_specification_type": "FILTER"
+          }
+        }
+      },
+      "description": "Secures VDI Environment"
+    },
+    "spec": {
+      "description": "Secures VDI Environment",
+      "resources": {
+        "is_policy_hitlog_enabled": false,
+        "allow_ipv6_traffic": false,
+        "ad_rule": {
+          "action": "MONITOR",
+          "outbound_allow_list": [],
+          "target_group": {
+            "filter": {
+              "params": {
+                "ADGroup": [
+                  "SSP Admins"
+                ]
+              },
+              "kind_list": [
+                "vm"
+              ],
+              "type": "CATEGORIES_MATCH_ALL"
+            },
+            "default_internal_policy": "DENY_ALL",
+            "peer_specification_type": "FILTER"
+          },
+          "inbound_allow_list": []
+        }
+      },
+      "name": "VDI Policy"
+    },
+    "metadata": {
+      "last_update_time": "2022-12-18T03:32:29Z",
+      "kind": "network_security_rule",
+      "uuid": "a213592f-9ecd-4a14-b7f4-ef1110928ba0",
+      "creation_time": "2022-12-18T03:32:28Z",
+      "spec_version": 0,
+      "spec_hash": "00000000000000000000000000000000000000000000000000",
+      "categories_mapping": {},
+      "owner_reference": {
+        "kind": "user",
+        "uuid": "00000000-0000-0000-0000-000000000000",
+        "name": "admin"
+      },
+      "categories": {}
+    }
+  },
+  {
+    "status": {
+      "state": "COMPLETE",
+      "execution_context": {
+        "task_uuid": [
+          "fd553fd1-53a8-42c7-ae3b-3ae9ff0a286d"
+        ]
+      },
+      "name": "VDI Policy",
+      "resources": {
+        "ad_rule": {
+          "action": "MONITOR",
+          "target_group": {
+            "filter": {
+              "kind_list": [
+                "vm"
+              ],
+              "type": "CATEGORIES_MATCH_ALL",
+              "params": {
+                "ADGroup": [
+                  "SSP Consumers"
+                ]
+              }
+            },
+            "default_internal_policy": "DENY_ALL",
+            "peer_specification_type": "FILTER"
+          }
+        }
+      },
+      "description": "Secures VDI Environment"
+    },
+    "spec": {
+      "description": "Secures VDI Environment",
+      "resources": {
+        "is_policy_hitlog_enabled": false,
+        "allow_ipv6_traffic": false,
+        "ad_rule": {
+          "action": "MONITOR",
+          "outbound_allow_list": [],
+          "target_group": {
+            "filter": {
+              "params": {
+                "ADGroup": [
+                  "SSP Consumers"
+                ]
+              },
+              "kind_list": [
+                "vm"
+              ],
+              "type": "CATEGORIES_MATCH_ALL"
+            },
+            "default_internal_policy": "DENY_ALL",
+            "peer_specification_type": "FILTER"
+          },
+          "inbound_allow_list": []
+        }
+      },
+      "name": "VDI Policy"
+    },
+    "metadata": {
+      "last_update_time": "2022-12-18T03:32:29Z",
+      "kind": "network_security_rule",
+      "uuid": "003525d1-5dc9-4b47-9333-33c2b0ad4237",
+      "creation_time": "2022-12-18T03:32:28Z",
+      "spec_version": 0,
+      "spec_hash": "00000000000000000000000000000000000000000000000000",
+      "categories_mapping": {},
+      "owner_reference": {
+        "kind": "user",
+        "uuid": "00000000-0000-0000-0000-000000000000",
+        "name": "admin"
+      },
+      "categories": {}
+    }
+  },
+  {
+    "status": {
+      "state": "COMPLETE",
+      "execution_context": {
+        "task_uuid": [
+          "0a0a9219-bd9d-4558-9f43-f8862c374309"
+        ]
+      },
+      "name": "VDI Policy",
+      "resources": {
+        "ad_rule": {
+          "action": "MONITOR",
+          "outbound_allow_list": [
+            {
+              "peer_specification_type": "ALL"
+            }
+          ],
+          "target_group": {
+            "filter": {
+              "kind_list": [
+                "vm"
+              ],
+              "type": "CATEGORIES_MATCH_ALL",
+              "params": {
+                "ADGroup": [
+                  "$Default"
+                ]
+              }
+            },
+            "default_internal_policy": "DENY_ALL",
+            "peer_specification_type": "FILTER"
+          },
+          "inbound_allow_list": [
+            {
+              "peer_specification_type": "ALL"
+            }
+          ]
+        }
+      },
+      "description": "Secures VDI Environment"
+    },
+    "spec": {
+      "description": "Secures VDI Environment",
+      "resources": {
+        "is_policy_hitlog_enabled": false,
+        "allow_ipv6_traffic": false,
+        "ad_rule": {
+          "action": "MONITOR",
+          "outbound_allow_list": [
+            {
+              "peer_specification_type": "ALL"
+            }
+          ],
+          "target_group": {
+            "filter": {
+              "params": {
+                "ADGroup": [
+                  "$Default"
+                ]
+              },
+              "kind_list": [
+                "vm"
+              ],
+              "type": "CATEGORIES_MATCH_ALL"
+            },
+            "default_internal_policy": "DENY_ALL",
+            "peer_specification_type": "FILTER"
+          },
+          "inbound_allow_list": [
+            {
+              "peer_specification_type": "ALL"
+            }
+          ]
+        }
+      },
+      "name": "VDI Policy"
+    },
+    "metadata": {
+      "last_update_time": "2022-12-18T03:32:29Z",
+      "kind": "network_security_rule",
+      "uuid": "0b256793-8e3f-4f85-9f81-262049681e01",
+      "creation_time": "2022-12-18T03:32:28Z",
+      "spec_version": 0,
+      "spec_hash": "00000000000000000000000000000000000000000000000000",
+      "categories_mapping": {},
+      "owner_reference": {
+        "kind": "user",
+        "uuid": "00000000-0000-0000-0000-000000000000",
+        "name": "admin"
+      },
+      "categories": {}
+    }
+  },
+  {
+    "status": {
+      "state": "COMPLETE",
+      "execution_context": {
+        "task_uuid": [
+          "7b58c242-9952-494a-8ded-b4bea03e7fa6"
+        ]
+      },
+      "name": "VDI Policy",
+      "resources": {
+        "ad_rule": {
+          "action": "MONITOR",
+          "outbound_allow_list": [
+            {
+              "peer_specification_type": "ALL"
+            }
+          ],
+          "target_group": {
+            "filter": {
+              "kind_list": [
+                "vm"
+              ],
+              "type": "CATEGORIES_MATCH_ALL",
+              "params": {
+                "ADGroup": [
+                  "Domain Admins"
+                ]
+              }
+            },
+            "default_internal_policy": "DENY_ALL",
+            "peer_specification_type": "FILTER"
+          },
+          "inbound_allow_list": [
+            {
+              "filter": {
+                "kind_list": [
+                  "vm"
+                ],
+                "type": "CATEGORIES_MATCH_ALL",
+                "params": {
+                  "AppType": [
+                    "Fiesta"
+                  ]
+                }
+              },
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "3085bfc8-6d57-4069-94cb-a649fbc27c35",
+                  "name": "ssh"
+                }
+              ],
+              "peer_specification_type": "FILTER"
+            }
+          ]
+        }
+      },
+      "description": "Secures VDI Environment"
+    },
+    "spec": {
+      "description": "Secures VDI Environment",
+      "resources": {
+        "is_policy_hitlog_enabled": false,
+        "allow_ipv6_traffic": false,
+        "ad_rule": {
+          "action": "MONITOR",
+          "outbound_allow_list": [
+            {
+              "peer_specification_type": "ALL"
+            }
+          ],
+          "target_group": {
+            "filter": {
+              "params": {
+                "ADGroup": [
+                  "Domain Admins"
+                ]
+              },
+              "kind_list": [
+                "vm"
+              ],
+              "type": "CATEGORIES_MATCH_ALL"
+            },
+            "default_internal_policy": "DENY_ALL",
+            "peer_specification_type": "FILTER"
+          },
+          "inbound_allow_list": [
+            {
+              "filter": {
+                "params": {
+                  "AppType": [
+                    "Fiesta"
+                  ]
+                },
+                "kind_list": [
+                  "vm"
+                ],
+                "type": "CATEGORIES_MATCH_ALL"
+              },
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "3085bfc8-6d57-4069-94cb-a649fbc27c35"
+                }
+              ],
+              "peer_specification_type": "FILTER"
+            }
+          ]
+        }
+      },
+      "name": "VDI Policy"
+    },
+    "metadata": {
+      "last_update_time": "2022-12-19T05:40:55Z",
+      "kind": "network_security_rule",
+      "uuid": "e61859bf-814e-4702-96c1-4e7f557ddf31",
+      "creation_time": "2022-12-18T03:32:28Z",
+      "spec_version": 2,
+      "spec_hash": "00000000000000000000000000000000000000000000000000",
+      "categories_mapping": {},
+      "owner_reference": {
+        "kind": "user",
+        "uuid": "00000000-0000-0000-0000-000000000000",
+        "name": "admin"
+      },
+      "categories": {}
+    }
+  },
+  {
+    "status": {
+      "state": "COMPLETE",
+      "execution_context": {
+        "task_uuid": [
+          "ceb65dec-1be2-4658-8251-eb9e0a5ea8bd"
+        ]
+      },
+      "name": "VDI Policy",
+      "resources": {
+        "ad_rule": {
+          "action": "MONITOR",
+          "outbound_allow_list": [
+            {
+              "filter": {
+                "kind_list": [
+                  "vm"
+                ],
+                "type": "CATEGORIES_MATCH_ALL",
+                "params": {
+                  "AppType": [
+                    "Exchange"
+                  ]
+                }
+              },
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "06745b09-abe3-429d-833e-0340f079aad8",
+                  "name": "imap"
+                }
+              ],
+              "peer_specification_type": "FILTER"
+            }
+          ],
+          "target_group": {
+            "filter": {
+              "kind_list": [
+                "vm"
+              ],
+              "type": "CATEGORIES_MATCH_ALL",
+              "params": {
+                "ADGroup": [
+                  "Domain Users"
+                ]
+              }
+            },
+            "default_internal_policy": "DENY_ALL",
+            "peer_specification_type": "FILTER"
+          },
+          "inbound_allow_list": [
+            {
+              "filter": {
+                "kind_list": [
+                  "vm"
+                ],
+                "type": "CATEGORIES_MATCH_ALL",
+                "params": {
+                  "CalmApplication": [
+                    "KOSecClients"
+                  ]
+                }
+              },
+              "protocol": "ALL",
+              "peer_specification_type": "FILTER"
+            }
+          ]
+        }
+      },
+      "description": "Secures VDI Environment"
+    },
+    "spec": {
+      "description": "Secures VDI Environment",
+      "resources": {
+        "is_policy_hitlog_enabled": false,
+        "allow_ipv6_traffic": false,
+        "ad_rule": {
+          "action": "MONITOR",
+          "outbound_allow_list": [
+            {
+              "filter": {
+                "params": {
+                  "AppType": [
+                    "Exchange"
+                  ]
+                },
+                "kind_list": [
+                  "vm"
+                ],
+                "type": "CATEGORIES_MATCH_ALL"
+              },
+              "service_group_list": [
+                {
+                  "kind": "service_group",
+                  "uuid": "06745b09-abe3-429d-833e-0340f079aad8"
+                }
+              ],
+              "peer_specification_type": "FILTER"
+            }
+          ],
+          "target_group": {
+            "filter": {
+              "params": {
+                "ADGroup": [
+                  "Domain Users"
+                ]
+              },
+              "kind_list": [
+                "vm"
+              ],
+              "type": "CATEGORIES_MATCH_ALL"
+            },
+            "default_internal_policy": "DENY_ALL",
+            "peer_specification_type": "FILTER"
+          },
+          "inbound_allow_list": [
+            {
+              "filter": {
+                "params": {
+                  "CalmApplication": [
+                    "KOSecClients"
+                  ]
+                },
+                "kind_list": [
+                  "vm"
+                ],
+                "type": "CATEGORIES_MATCH_ALL"
+              },
+              "protocol": "ALL",
+              "peer_specification_type": "FILTER"
+            }
+          ]
+        }
+      },
+      "name": "VDI Policy"
+    },
+    "metadata": {
+      "last_update_time": "2022-12-18T22:01:05Z",
+      "kind": "network_security_rule",
+      "uuid": "2dbea494-8645-4dcc-905e-f078f960d614",
+      "creation_time": "2022-12-18T03:32:29Z",
+      "spec_version": 2,
+      "spec_hash": "00000000000000000000000000000000000000000000000000",
+      "categories_mapping": {},
+      "owner_reference": {
+        "kind": "user",
+        "uuid": "00000000-0000-0000-0000-000000000000",
+        "name": "admin"
+      },
+      "categories": {}
+    }
+  }
+]

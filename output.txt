@@ -1,0 +1,349 @@
+10.42.156.39
+admin
+nx2Tech156!
+Network Security Rules (Flow) on  10.42.156.39
+
+######################
+
+Policy Type: Quarantine
+
+Name: Quarantine
+Description: System defined quarantine rule for Quarantine:Default category
+
+State:  ENFORCED
+
+
+--------COMPLETE VM ISOLATION--------
+NO INBOUND/OUTBOUND TRAFFIC IS PERMITTED
+
+######################
+
+Policy Type: Quarantine
+
+Name: Quarantine
+Description: System defined quarantine rule for Quarantine:Forensics category
+
+State:  ENFORCED
+
+---- INBOUND SOURCE(S)------
+RuleID: 1
+SOURCE : ALLOWED
+Subnet:  192.168.10.200/32 : ALL
+
+RuleID: 2
+SOURCE : ALLOWED
+Address Group: KOSVPN : MS_RDP
+
+
+######################
+
+Policy Type: Application
+
+Name: FSCVM-default-policy
+Description: default-value-for-flow-security-central-vm
+
+State:  ENFORCED
+
+
+------PROTECTING------
+AppType : Default
+
+---- INBOUND SOURCE(S)------
+RuleID: 1
+SOURCE : ALLOWED
+ALL : ALL
+
+---- OUTBOUND TARGETS(S)------
+RuleID: 1
+TARGET : ALLOWED
+ALL : ALL
+
+
+######################
+
+Policy Type: Application
+
+Name: tj-linux
+Description: secure linux
+
+State:  MONITORING
+
+
+------PROTECTING------
+AppType : tj-linux
+
+---- INBOUND SOURCE(S)------
+RuleID: 1
+SOURCE : ALLOWED
+Subnet:  10.0.0.0/8 : ALL
+
+---- OUTBOUND TARGETS(S)------
+RuleID: 1
+TARGET : ALLOWED
+ALL : ALL
+
+
+######################
+
+Policy Type: Application
+
+Name: Test
+Description: fdsfasdf
+
+State:  MONITORING
+
+
+------PROTECTING------
+AppType : Microsoft_SQL
+
+---- INBOUND SOURCE(S)------
+RuleID: 4
+SOURCE : ALLOWED
+Subnet:  192.168.10.0/24 TCP Port Range:  3066-3070
+
+RuleID: 5
+SOURCE : ALLOWED
+Subnet:  192.168.10.0/24 UDP Port Range:  3456
+
+RuleID: 3
+SOURCE : ALLOWED
+Address Group: KOSVPN : ssh
+
+RuleID: 2
+SOURCE : ALLOWED
+Subnet:  10.42.156.0/24 : https
+Subnet:  10.42.156.0/24 : https
+
+RuleID: 1
+SOURCE : ALLOWED
+AppFamily : DevOps : ms-sql-m
+
+---- OUTBOUND TARGETS(S)------
+RuleID: 1
+TARGET : ALLOWED
+AppTier : Default : ms-sql-m
+
+
+######################
+
+Policy Type: Application
+
+Name: SecureFiesta
+Description: Limit access to and from Fiesta APP
+
+State:  MONITORING
+
+
+------PROTECTING------
+AppTier : web
+AppType : Fiesta
+
+---- INBOUND SOURCE(S)------
+RuleID: 1
+SOURCE : ALLOWED
+VDI : Eng : ALL
+
+RuleID: 4
+SOURCE : ALLOWED
+Address Group: KOSVPN : ICMP
+
+RuleID: 3
+SOURCE : ALLOWED
+Address Group: KOSVPN : http
+
+RuleID: 2
+SOURCE : ALLOWED
+VDI : PartyPlanners : http
+
+---- OUTBOUND TARGETS(S)------
+RuleID: 4
+TARGET : ALLOWED
+Subnet:  10.42.156.41/32 : domain
+
+RuleID: 1
+TARGET : ALLOWED
+Subnet:  10.10.10.0/24 : ALL
+
+RuleID: 3
+TARGET : ALLOWED
+Address Group:  AWS_Scope TCP Port Range:  1234-1240
+Address Group:  AWS_Scope TCP Port Range:  4567
+
+RuleID: 5
+TARGET : ALLOWED
+Address Group:  AWS_Scope UDP Port Range:  1234
+
+RuleID: 2
+TARGET : ALLOWED
+AppTier : DB : ALL
+AppType : Fiesta : ALL
+
+
+######################
+
+Policy Type: Application
+
+Name: SecureFiesta
+Description: Limit access to and from Fiesta APP
+
+State:  MONITORING
+
+
+------PROTECTING------
+AppTier : DB
+AppType : Fiesta
+
+---- INBOUND SOURCE(S)------
+RuleID: 1
+SOURCE : ALLOWED
+VDI : Eng : ALL
+
+RuleID: 2
+SOURCE : ALLOWED
+AppTier : web : mysql
+AppType : Fiesta : mysql
+
+---- OUTBOUND TARGETS(S)------
+RuleID: 3
+TARGET : ALLOWED
+Subnet:  10.42.156.41/32 : domain
+Subnet:  10.42.156.41/32 : ssh
+
+RuleID: 1
+TARGET : ALLOWED
+Subnet:  10.10.10.0/24 UDP Port Range:  53
+
+RuleID: 2
+TARGET : ALLOWED
+Subnet:  10.10.10.0/24 : mdns
+
+
+######################
+
+Policy Type: Isolation
+
+Name: IsolateDev_Prod
+Description: Isolate dev environment from Prod
+
+State:  MONITORING
+
+ISOLATING TO/FROM
+Environment : Dev
+Environment : Production
+
+######################
+
+Policy Type: Isolation
+
+Name: nonenvtest
+Description: blan
+
+State:  MONITORING
+
+ISOLATING TO/FROM
+AppType : Fiesta
+CalmApplication : KOSecClients
+
+######################
+
+Policy Type: VDI/AD Rule
+
+Name: VDI Policy
+Description: Secures VDI Environment
+
+State:  MONITORING
+
+
+------APPLIES TO AD GROUP------
+SSP Admins
+
+---- INBOUND SOURCE(S)------
+---- OUTBOUND TARGETS(S)------
+
+######################
+
+Policy Type: VDI/AD Rule
+
+Name: VDI Policy
+Description: Secures VDI Environment
+
+State:  MONITORING
+
+
+------APPLIES TO AD GROUP------
+SSP Consumers
+
+---- INBOUND SOURCE(S)------
+---- OUTBOUND TARGETS(S)------
+
+######################
+
+Policy Type: VDI/AD Rule
+
+Name: VDI Policy
+Description: Secures VDI Environment
+
+State:  MONITORING
+
+
+------APPLIES TO AD GROUP------
+$Default
+
+---- INBOUND SOURCE(S)------
+RuleID: 
+SOURCE : ALLOWED
+ALL : ALL
+
+---- OUTBOUND TARGETS(S)------
+RuleID: 
+TARGET : ALLOWED
+ALL : ALL
+
+
+######################
+
+Policy Type: VDI/AD Rule
+
+Name: VDI Policy
+Description: Secures VDI Environment
+
+State:  MONITORING
+
+
+------APPLIES TO AD GROUP------
+Domain Admins
+
+---- INBOUND SOURCE(S)------
+RuleID: 
+SOURCE : ALLOWED
+AppType : Fiesta : ssh
+
+---- OUTBOUND TARGETS(S)------
+RuleID: 
+TARGET : ALLOWED
+ALL : ALL
+
+
+######################
+
+Policy Type: VDI/AD Rule
+
+Name: VDI Policy
+Description: Secures VDI Environment
+
+State:  MONITORING
+
+
+------APPLIES TO AD GROUP------
+Domain Users
+
+---- INBOUND SOURCE(S)------
+RuleID: 
+SOURCE : ALLOWED
+CalmApplication : KOSecClients : ALL
+
+---- OUTBOUND TARGETS(S)------
+RuleID: 
+TARGET : ALLOWED
+AppType : Exchange : imap
+
