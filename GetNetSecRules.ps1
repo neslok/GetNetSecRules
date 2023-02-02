@@ -1,6 +1,7 @@
-#########################################################
-##
-## .\GetNetSecRules.ps1 *> SecRules.txt
+############################################################
+##  execute script and pipe output to file "SecRules.txt" ##
+##      .\GetNetSecRules.ps1 *> SecRules.txt              ##
+############################################################
 
 
 
@@ -22,7 +23,7 @@ foreach ($c in $clusterdeets) {
   Write-Host $RESTAPIUser
   Write-Host $RESTAPIPassword
 
-  Write-Host "Network Security Rules (Flow) on " $prisCentIP
+  Write-Host "Network Security Rules (Flow Microsegmentation) on " $prisCentIP
 
 
   # Creates variable with base API BaseURL
@@ -47,7 +48,9 @@ foreach ($c in $clusterdeets) {
 
   $NRlist = Invoke-RestMethod -SkipCertificateCheck -Uri $BaseURL'network_security_rules/list' -Method 'POST' -Headers $headers -Body $body
 
-  $NRresponse =  $NRlist.entities | Convertto-Json -depth 100 | Out-File -FilePath .\nrresonse.json
+#uncomment to get a JSON file for TS/DEV purposes
+
+#$NRresponse =  $NRlist.entities | Convertto-Json -depth 100 | Out-File -FilePath .\nrresponse.json  #uncomment to get a JSON file for TS/DEV purposes
 
 
 ## Functions to collect details on each different policy type (Quarantine, Application, Isolation and VDI)
@@ -605,11 +608,11 @@ function GetVDIRules {
     }
 }
 
-######## Main script function #### 
+######## Main script  #### 
     
-  foreach ($r in $NRlist.entities) {  # $r is each rule entity with each policy 
+  foreach ($r in $NRlist.entities) {                                        # $r is each rule entity with each policy 
     
-    $a = Get-Member -InputObject $r.spec.resources -membertype noteproperty ## Gets the rule type from each rule as they are ahndled slightly differently
+    $a = Get-Member -InputObject $r.spec.resources -membertype noteproperty # Gets the rule type from each rule as they are handled slightly differently
 
     ## When a match on a rule type is found, the function specific to the policy/rule type is executed
 
